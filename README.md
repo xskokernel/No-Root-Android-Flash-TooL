@@ -36,46 +36,46 @@
 
 | | 特性 | 说明 |
 |:---:|:---|:---|
-| <img src="assets/icons/feat_noroot.png" width="40" /> | **免 Root** | 不解 BL、不装 Magisk、不碰系统分区，普通用户开箱即用 |
-| <img src="assets/icons/feat_nopc.png" width="40" /> | **无需电脑** | 手机直连，一根 OTG 线走完全流程 |
-| <img src="assets/icons/feat_pipeline.png" width="40" /> | **完整链路** | 9008 深刷、Fastboot、MTK、ADB 四大通道一应俱全 |
-| <img src="assets/icons/feat_root.png" width="40" /> | **可选 Root** | Root 是**可选项**，而不是**门槛** —— 进阶玩家也能尽兴 |
+| <img src="assets/icons/feat_noroot.png" width="56" height="56" style="vertical-align:middle" /> | **免 Root** | 不解 BL、不装 Magisk、不碰系统分区，普通用户开箱即用 |
+| <img src="assets/icons/feat_nopc.png" width="56" height="56" style="vertical-align:middle" /> | **无需电脑** | 手机直连，一根 OTG 线走完全流程 |
+| <img src="assets/icons/feat_pipeline.png" width="56" height="56" style="vertical-align:middle" /> | **完整链路** | 9008 深刷、Fastboot、MTK、ADB 四大通道一应俱全 |
+| <img src="assets/icons/feat_root.png" width="56" height="56" style="vertical-align:middle" /> | **可选 Root** | Root 是**可选项**，而不是**门槛** —— 进阶玩家也能尽兴 |
 
 ---
 
 ## 功能一览
 
-### <img src="assets/icons/fn_9008.png" width="36" /> 9008 / EDL 深度刷写
+### <img src="assets/icons/fn_9008.png" width="44" height="44" style="vertical-align:middle" /> 9008 / EDL 深度刷写
 通过 USB Host 直连高通 9008 / EDL 端口完成深度刷机。
 掉进 9008、变砖救援、底层救回 —— 不 Root 也能进、也能刷。
 > 支持分区刷写、批量提取、批量擦除、全盘操作。
 
-### <img src="assets/icons/fn_fastboot.png" width="36" /> Fastboot 刷写
+### <img src="assets/icons/fn_fastboot.png" width="44" height="44" style="vertical-align:middle" /> Fastboot 刷写
 免 Root 环境下直接进行 fastboot 分区刷写、镜像写入与设备读写。
 > 支持槽位切换、分区表预览、命令行与执行历史。
 
-### <img src="assets/icons/fn_mtk.png" width="36" /> MTK TOOL（联发科线刷）
+### <img src="assets/icons/fn_mtk.png" width="44" height="44" style="vertical-align:middle" /> MTK TOOL（联发科线刷）
 面向 **MediaTek（联发科）BROM / Preloader / DA** 平台的线刷工具。
 选择 DA（必选）与 Preloader（可选）后，即可对设备分区进行读写与擦除。
 > 支持读取分区、写入分区、擦除、读全部、写全部，以及按 **scatter** 一键刷写，并可生成 MTK SP Flash Tool 兼容的 `scatter.txt`。
 
-### <img src="assets/icons/fn_adb.png" width="36" /> ADB 设备管理
+### <img src="assets/icons/fn_adb.png" width="44" height="44" style="vertical-align:middle" /> ADB 设备管理
 设备识别、授权与日常管理，一个 App 全搞定。
 > 支持 Shell 终端、Sideload 侧载、文件操作与快捷重启。
 
-### <img src="assets/icons/fn_miui.png" width="36" /> 小米 / Redmi 平台刷机
+### <img src="assets/icons/fn_miui.png" width="44" height="44" style="vertical-align:middle" /> 小米 / Redmi 平台刷机
 识别小米线刷包结构，勾选分区逐一刷入，镜像擦除一步到位。
 
-### <img src="assets/icons/fn_oplus.png" width="36" /> OPPO / OnePlus / realme 平台刷机
+### <img src="assets/icons/fn_oplus.png" width="44" height="44" style="vertical-align:middle" /> OPPO / OnePlus / realme 平台刷机
 支持常规线刷与纯 FastbootD 两种模式，自动扫描镜像并预览分区。
 
-### <img src="assets/icons/fn_payload.png" width="36" /> Payload 解压
+### <img src="assets/icons/fn_payload.png" width="44" height="44" style="vertical-align:middle" /> Payload 解压
 从 `payload.bin` 中读取分区列表，按需选择解压，支持多线程与搜索。
 
-### <img src="assets/icons/fn_sn.png" width="36" /> SN 修补
+### <img src="assets/icons/fn_sn.png" width="44" height="44" style="vertical-align:middle" /> SN 修补
 对指定文件进行 Bootloader SN 修补。
 
-### <img src="assets/icons/fn_ui.png" width="36" /> 精致体验
+### <img src="assets/icons/fn_ui.png" width="44" height="44" style="vertical-align:middle" /> 精致体验
 MIUI / HyperOS 风格界面 + 液体玻璃效果，清晰的状态提示与沉浸式日志。
 
 ---
