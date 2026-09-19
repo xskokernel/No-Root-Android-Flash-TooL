@@ -36,46 +36,46 @@ Traditional flashing almost always requires Root or a computer: either gaining r
 
 | | Feature | Description |
 |:---:|:---|:---|
-| <img src="https://api.iconify.design/mdi:shield-check.svg?color=%2300c853" width="22" /> | **No Root required** | No bootloader unlock, no Magisk, no system partitions touched — ready out of the box |
-| <img src="https://api.iconify.design/mdi:laptop-off.svg?color=%232196f3" width="22" /> | **No PC required** | Phone-to-device directly, one OTG cable for the whole flow |
-| <img src="https://api.iconify.design/mdi:link-variant.svg?color=%23ff9800" width="22" /> | **Complete pipeline** | 9008 deep flash, Fastboot, MTK, and ADB — four channels |
-| <img src="https://api.iconify.design/mdi:cog.svg?color=%239c27b0" width="22" /> | **Optional Root** | Root is an **option**, not a **barrier** — power users are welcome too |
+| <img src="assets/icons/feat_noroot.png" width="26" /> | **No Root required** | No bootloader unlock, no Magisk, no system partitions touched — ready out of the box |
+| <img src="assets/icons/feat_nopc.png" width="26" /> | **No PC required** | Phone-to-device directly, one OTG cable for the whole flow |
+| <img src="assets/icons/feat_pipeline.png" width="26" /> | **Complete pipeline** | 9008 deep flash, Fastboot, MTK, and ADB — four channels |
+| <img src="assets/icons/feat_root.png" width="26" /> | **Optional Root** | Root is an **option**, not a **barrier** — power users are welcome too |
 
 ---
 
 ## Features
 
-### <img src="https://api.iconify.design/mdi:fire.svg?color=%23ff5722" width="24" /> 9008 / EDL Deep Flash
+### <img src="assets/icons/fn_9008.png" width="28" /> 9008 / EDL Deep Flash
 Connect directly to Qualcomm's 9008 / EDL port via USB Host for deep flashing.
 Brick rescue, 9008 recovery, low-level restore — no Root needed.
 > Supports partition flashing, batch extraction, batch erase, and full-disk operations.
 
-### <img src="https://api.iconify.design/mdi:flash.svg?color=%23ffc107" width="24" /> Fastboot Flashing
+### <img src="assets/icons/fn_fastboot.png" width="28" /> Fastboot Flashing
 Perform fastboot partition flashing, image writing, and device read/write without Root.
 > Supports slot switching, partition preview, command line, and history.
 
-### <img src="https://api.iconify.design/mdi:cellphone-link.svg?color=%2300bcd4" width="24" /> MTK TOOL (MediaTek Flashing)
+### <img src="assets/icons/fn_mtk.png" width="28" /> MTK TOOL (MediaTek Flashing)
 A flashing tool for **MediaTek BROM / Preloader / DA** platforms.
 Pick a DA (required) and a Preloader (optional), then read, write, and erase device partitions.
 > Supports read / write / erase partitions, read-all, write-all, and one-click **scatter** flashing, and can generate a `scatter.txt` compatible with MTK SP Flash Tool.
 
-### <img src="https://api.iconify.design/mdi:usb.svg?color=%23795548" width="24" /> ADB Device Management
+### <img src="assets/icons/fn_adb.png" width="28" /> ADB Device Management
 Device detection, authorization, and day-to-day management — all in one app.
 > Supports shell terminal, sideload, file operations, and quick reboot.
 
-### <img src="https://api.iconify.design/mdi:disc.svg?color=%23ff9800" width="24" /> Xiaomi / Redmi Platform Flashing
+### <img src="assets/icons/fn_miui.png" width="28" /> Xiaomi / Redmi Platform Flashing
 Detects Xiaomi fastboot package structure, flashes selected partitions, handles erasing in one go.
 
-### <img src="https://api.iconify.design/mdi:disc.svg?color=%234caf50" width="24" /> OPPO / OnePlus / realme Platform Flashing
+### <img src="assets/icons/fn_oplus.png" width="28" /> OPPO / OnePlus / realme Platform Flashing
 Supports both Normal and Pure FastbootD modes, auto-scans images, and previews partitions.
 
-### <img src="https://api.iconify.design/mdi:package-variant-closed.svg?color=%23607d8b" width="24" /> Payload Extraction
+### <img src="assets/icons/fn_payload.png" width="28" /> Payload Extraction
 Reads the partition list from `payload.bin`, extracts on demand, with multi-threading and search.
 
-### <img src="https://api.iconify.design/mdi:tag-text.svg?color=%23e91e63" width="24" /> SN Patch
+### <img src="assets/icons/fn_sn.png" width="28" /> SN Patch
 Patches Bootloader SN for a specified file.
 
-### <img src="https://api.iconify.design/mdi:palette.svg?color=%23ab47bc" width="24" /> Refined Experience
+### <img src="assets/icons/fn_ui.png" width="28" /> Refined Experience
 MIUI / HyperOS-style UI with liquid-glass effects, clear status feedback, and immersive logs.
 
 ---
