@@ -1,6 +1,16 @@
 {
-  "latest": "5.2.0",
+  "latest": "5.5.0",
   "releases": [
+    {
+      "version": "5.5.0",
+      "tag": "MOFLASHV5.5.0",
+      "name": "V5.5.0 MOFLASH",
+      "date": "2026-09-30",
+      "notes": "[+]优化UI交互\n[+]更新ADBTOOL\n[+]优化使用,提升用户体验\n[+]修复了非重大BUG\n[+]更新MTKTOOL,新增解锁/回锁\n[+]更新FastbootTooL,新增关闭AVB2.0效验\n[+]优化软件体积\n[+]增加软件版本检测更新\n[+]增加软件公告",
+      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.5.0/MOFLASH_5.5.0-release-20261001.apk",
+      "apkName": "MOFLASH_5.5.0-release-20261001.apk",
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.5.0"
+    },
     {
       "version": "5.2.0",
       "tag": "MOFLASHV5.2.0",
