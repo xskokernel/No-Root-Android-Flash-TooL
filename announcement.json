@@ -1,0 +1,7 @@
+{
+  "version": "1",
+  "title": "软件公告",
+  "text": "【MOFLASH 公告】\n\n欢迎使用 MOFLASH —— 免 Root 安卓刷机工具箱。\n\n本工具在 Android 8.0（API 24）及以上运行，支持免 Root（USB Host）与 Root 两种模式，\n覆盖高通 QDL(firehose)/Fastboot、联发科 MTK(BROM/Preloader/DA)、ADB 等主流刷写方式。\n\n主要功能：\n· QDL 线刷：选品牌/机型引导（DevprgProgrammer），支持全量包刷写、分区表读写、QFIL。\n· Fastboot：小米 MiFlash 刷机包解析、欧加(OPPO/OnePlus/Realme)线刷、纯 FastbootD 线刷。\n· MTK 工具：读取设备信息(GPT)、读写/擦除分区、切换槽位、Bootloader 解锁(seccfg)。\n· ADB 工具：设备管理、应用管理、APK 提取、交互式 Shell。\n· 其他：payload.bin 解压、SN 修补、分区表预览、固件包刷入等。\n\n提示：\n· 刷机有风险，操作前请务必备份重要数据，并确认设备型号与固件匹配。\n· 部分功能需设备进入对应模式（如 QDL 9008 / Fastboot / MTK BROM），并可能需要 Root。\n· 遇到问题可前往项目主页反馈：https://github.com/xskokernel/No-Root-Android-Flash-TooL\n\n感谢使用，祝你刷机顺利。",
+  "updatedAt": "2026-09-30T13:44:46+00:00",
+  "updatedAtDisplay": "2026-09-30 13:44:46"
+}
