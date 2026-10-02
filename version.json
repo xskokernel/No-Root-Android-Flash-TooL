@@ -1,16 +1,7 @@
 {
   "latest": "5.5.0",
+  "latestPrerelease": "5.5.1",
   "releases": [
-    {
-      "version": "5.5.0",
-      "tag": "MOFLASHV5.5.0",
-      "name": "V5.5.0 MOFLASH",
-      "date": "2026-09-30",
-      "notes": "[+]优化UI交互\n[+]更新ADBTOOL\n[+]优化使用,提升用户体验\n[+]修复了非重大BUG\n[+]更新MTKTOOL,新增解锁/回锁\n[+]更新FastbootTooL,新增关闭AVB2.0效验\n[+]优化软件体积\n[+]增加软件版本检测更新\n[+]增加软件公告",
-      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.5.0/MOFLASH_5.5.0-release-20261001.apk",
-      "apkName": "MOFLASH_5.5.0-release-20261001.apk",
-      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.5.0"
-    },
     {
       "version": "5.5.1",
       "tag": "MOFLASHV5.5.1",
@@ -19,7 +10,19 @@
       "notes": "[+]可能解决了ADB TOOL一个潜在问题\n[+]优化ADB TOOL页-子页的动画\n[+]重点:QFIL增加可选择contents.xml\n[+]Fix MTK TOOL Can't select the file",
       "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.5.1/MOFLASH_5.5.1-release-20261003.apk",
       "apkName": "MOFLASH_5.5.1-release-20261003.apk",
-      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.5.1"
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.5.1",
+      "prerelease": true
+    },
+    {
+      "version": "5.5.0",
+      "tag": "MOFLASHV5.5.0",
+      "name": "V5.5.0 MOFLASH",
+      "date": "2026-09-30",
+      "notes": "[+]优化UI交互\n[+]更新ADBTOOL\n[+]优化使用,提升用户体验\n[+]修复了非重大BUG\n[+]更新MTKTOOL,新增解锁/回锁\n[+]更新FastbootTooL,新增关闭AVB2.0效验\n[+]优化软件体积\n[+]增加软件版本检测更新\n[+]增加软件公告",
+      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.5.0/MOFLASH_5.5.0-release-20261001.apk",
+      "apkName": "MOFLASH_5.5.0-release-20261001.apk",
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.5.0",
+      "prerelease": false
     },
     {
       "version": "5.2.0",
@@ -29,7 +32,8 @@
       "notes": "V5.2.0 MOFLASH 更新日志\r\n[+]Ui更新:包括主页,工具页,设置页\r\n[+]Update And Fix MTKTOOL ⭐ 更新以及修复了MTKTOOL-⭐大更新\r\n[+]修复了ADBTOOL 使其逻辑更加完善\r\n[+]修复了很多ui交互上的bug和问题 优化使用\r\n[+]修复识别误报的bug\r\n<img width=\"1080\" height=\"2376\" alt=\"Screenshot_2026-09-26-16-11-59-59_80fe29cf11262e130ad845c2fe708e14\" src=\"https://github.com/user-attachments/assets/d6692beb-c938-43bf-a328-125821a61c94\" />\r\n<img width=\"1080\" height=\"3950\" alt=\"Screenshot_2026-09-26-16-11-44-54\" src=\"https://github.com/user-attachments/assets/84f14be7-691a-4e2f-a98e-3b3c26a06f80\" />\r\n\r\n",
       "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.2.0/MOFLASH_5.2.0-release-20260926.apk",
       "apkName": "MOFLASH_5.2.0-release-20260926.apk",
-      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.2.0"
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.2.0",
+      "prerelease": false
     },
     {
       "version": "5.1.0",
@@ -39,7 +43,8 @@
       "notes": "[+]修复一些ui交互\r\n[+]大改ADB usbhost逻辑 使其更完善\r\n[+]修复了一点点bug\r\n[+]Fix Oplus fastboot flash",
       "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.1.0/MOFLASH_5.1.0-release-20260925.apk",
       "apkName": "MOFLASH_5.1.0-release-20260925.apk",
-      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.1.0"
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.1.0",
+      "prerelease": false
     },
     {
       "version": "5.0.0",
@@ -49,7 +54,8 @@
       "notes": "\r\n<img width=\"1080\" height=\"2376\" alt=\"Screenshot_2026-09-25-08-19-56-93_80fe29cf11262e130ad845c2fe708e14\" src=\"https://github.com/user-attachments/assets/f08fe547-ab89-435a-ad28-e44b89d925d7\" />\r\n<img width=\"1080\" height=\"2376\" alt=\"Screenshot_2026-09-25-08-19-54-81_80fe29cf11262e130ad845c2fe708e14\" src=\"https://github.com/user-attachments/assets/c0e8a5c4-5604-42a2-8368-b390157f03c5\" />\r\n[+]Fix Bug\r\n[+]Update Interactive animation\r\n[+]Add MTK TOOL No Root or Root ⭐\r\n[+]Fix fastboot Tool  subpage\r\n",
       "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.0.0/MOFLASH_5.0.0-release-20260924.apk",
       "apkName": "MOFLASH_5.0.0-release-20260924.apk",
-      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.0.0"
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.0.0",
+      "prerelease": false
     },
     {
       "version": "4.7.1",
@@ -59,7 +65,8 @@
       "notes": "[+]优化\r\n[+]add 全盘 oread 生成 rawprogram0-5.xml 配置文件 已测试并且测试生成的文件能直接用于刷写",
       "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV4.7.1/MOFLASH_4.7.1-release-20260912.apk",
       "apkName": "MOFLASH_4.7.1-release-20260912.apk",
-      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV4.7.1"
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV4.7.1",
+      "prerelease": false
     },
     {
       "version": "4.7",
@@ -69,7 +76,8 @@
       "notes": "[+]Fix ADB\r\n[+]add Y700 五代 引导 have v1 and v2\r\n[+]Fix adb and fastboot Device inspection\r\n[+]Fix QDL\r\n<img width=\"1080\" height=\"2376\" alt=\"Screenshot_2026-09-12-11-27-28-19_80fe29cf11262e130ad845c2fe708e14\" src=\"https://github.com/user-attachments/assets/ce2a7856-7924-4bff-90a5-ef460db07de2\" />\r\n",
       "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV4.7/MOFLASH_4.7-release-20260912.apk",
       "apkName": "MOFLASH_4.7-release-20260912.apk",
-      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV4.7"
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV4.7",
+      "prerelease": false
     },
     {
       "version": "4.6.2",
@@ -79,7 +87,8 @@
       "notes": "<img width=\"1080\" height=\"2376\" alt=\"Screenshot_2026-09-06-12-40-23-94_80fe29cf11262e130ad845c2fe708e14\" src=\"https://github.com/user-attachments/assets/c651a722-86d5-4617-ba50-c0e604709056\" />\r\nAndroid 免Root 刷写工具",
       "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV4.6.2/MOFLASH_4.6.2-release-20260906.apk",
       "apkName": "MOFLASH_4.6.2-release-20260906.apk",
-      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV4.6.2"
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV4.6.2",
+      "prerelease": false
     }
   ]
 }
