@@ -122,3 +122,7 @@ MIUI / HyperOS 风格界面 + 液体玻璃效果，清晰的状态提示与沉�
 **无需 Root，一部手机，即可刷写。**
 
 </div>
+
+## Login 登录
+account(账号)  lscm
+password(密码) lscm520
