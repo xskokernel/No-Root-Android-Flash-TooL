@@ -1,7 +1,18 @@
 {
   "latest": "5.5.0",
-  "latestPrerelease": "5.5.1",
+  "latestPrerelease": "5.6.0",
   "releases": [
+    {
+      "version": "5.6.0",
+      "tag": "MOFLASHV5.6.0",
+      "name": "V5.6.0 MOFLASH",
+      "date": "2026-10-03",
+      "notes": "[+]可能解决了ADB TOOL一个潜在问题\n[+]优化ADB TOOL页-子页的动画\n[+]重点:QFIL增加可选择contents.xml\n[+]修复MTKTOOL无法选择文件的问题\n[+]全面更新重构MTKTOOL,可能存在Bug\n[+]mtktool现在提供可选择的两种后端 nusb 与 libusb\n--------------\nEnglish:\n[+] Possibly fixed a potential issue in ADB TOOL\n[+] Improved animations for ADB TOOL pages / sub-pages\n[+] IMPORTANT: QFIL now supports selecting a contents.xml\n[+] Fix: MTK TOOL couldn't select the file\n[+] Fully refactored MTKTOOL — bugs may exist\n[+] MTKTOOL now offers two selectable backends: nusb and libusb",
+      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.6.0/MOFLASH_5.6.0-release-20261003.apk",
+      "apkName": "MOFLASH_5.6.0-release-20261003.apk",
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.6.0",
+      "prerelease": true
+    },
     {
       "version": "5.5.1",
       "tag": "MOFLASHV5.5.1",
