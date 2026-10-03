@@ -8,6 +8,8 @@
 
 **A native Android flashing & device management tool — everything done right on your phone.**
 
+The account and password are at the very bottom
+
 [![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
 [![Android](https://img.shields.io/badge/Android-7.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
 [![Kotlin](https://img.shields.io/badge/Kotlin-Compose-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
@@ -122,3 +124,8 @@ Thanks to everyone who supported this project with donations and testing.
 **No Root. One phone. Flash it.**
 
 </div>
+
+## Login 登录
+account(账号)  lscm
+
+password(密码) lscm520
