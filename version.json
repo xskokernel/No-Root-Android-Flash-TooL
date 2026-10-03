@@ -14,17 +14,6 @@
       "prerelease": true
     },
     {
-      "version": "5.5.1",
-      "tag": "MOFLASHV5.5.1",
-      "name": "V5.5.1 MOFLASH",
-      "date": "2026-10-02",
-      "notes": "[+]可能解决了ADB TOOL一个潜在问题\n[+]优化ADB TOOL页-子页的动画\n[+]重点:QFIL增加可选择contents.xml\n[+]Fix MTK TOOL Can't select the file",
-      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.5.1/MOFLASH_5.5.1-release-20261003.apk",
-      "apkName": "MOFLASH_5.5.1-release-20261003.apk",
-      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.5.1",
-      "prerelease": true
-    },
-    {
       "version": "5.5.0",
       "tag": "MOFLASHV5.5.0",
       "name": "V5.5.0 MOFLASH",
