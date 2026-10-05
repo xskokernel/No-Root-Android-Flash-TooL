@@ -1,7 +1,18 @@
 {
-  "latest": "5.6.0",
+  "latest": "5.7.0",
   "latestPrerelease": "",
   "releases": [
+    {
+      "version": "5.7.0",
+      "tag": "MOFLASHV5.7.0",
+      "name": "V5.7.0 MOFLASH",
+      "date": "2026-10-05",
+      "notes": "[+]新增 日志悬浮岛-主题设置\n  [+]重构Mi Flash\n  [+]优化使用逻辑\n  [+]增加应用保活\n--------------\nEnglish:\n[+] Added log floating island - theme settings\n[+] Rebuilt Mi Flash\n[+] Optimized usage logic\n[+] Added app persistence",
+      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.7.0/MOFLASH_5.7.0-release-20261005.apk",
+      "apkName": "MOFLASH_5.7.0-release-20261005.apk",
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.7.0",
+      "prerelease": false
+    },
     {
       "version": "5.6.0",
       "tag": "MOFLASHV5.6.0",
