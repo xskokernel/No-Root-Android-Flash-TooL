@@ -1,7 +1,18 @@
 {
   "latest": "5.7.0",
-  "latestPrerelease": "",
+  "latestPrerelease": "5.7.5",
   "releases": [
+    {
+      "version": "5.7.5",
+      "tag": "MOFLASHV5.7.5",
+      "name": "V5.7.5 MOFLASH",
+      "date": "2026-10-07",
+      "notes": "[+]优化 日志悬浮岛 详情可看设置\n  [+]重构Log Text打印 只针对Fastboot 与 QDL\n  [+]优化使用逻辑\n  [+]当语言为English时 补上了部分未翻译的文本\n  [+]优化MTKTOOL部分逻辑 进行了进一步完善\n--------------\nEnglish:\n[+] Optimized the log floating island - details can be found in settings\n[+] Rebuilt Log Text printing, only for Fastboot and QDL\n[+] Optimized the usage logic\n[+] Added some untranslated text when the language is English\n[+] Further improved the logic of MTKTOOL",
+      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.7.5/MOFLASH_5.7.5-release-20261007.apk",
+      "apkName": "MOFLASH_5.7.5-release-20261007.apk",
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.7.5",
+      "prerelease": true
+    },
     {
       "version": "5.7.0",
       "tag": "MOFLASHV5.7.0",
