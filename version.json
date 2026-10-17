@@ -1,7 +1,18 @@
 {
-  "latest": "5.7.5",
+  "latest": "5.8.0",
   "latestPrerelease": "",
   "releases": [
+    {
+      "version": "5.8.0",
+      "tag": "MOFLASHV5.8.0",
+      "name": "V5.8.0 MOFLASH",
+      "date": "2026-10-17",
+      "notes": "[+]自行体验 增加修改以及删除了很多东西\n--------------\nEnglish:\n[+] I added, changed, and deleted a lot of stuff myself",
+      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.8.0/MOFLASH_5.8.0-release-20261017.apk",
+      "apkName": "MOFLASH_5.8.0-release-20261017.apk",
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.8.0",
+      "prerelease": false
+    },
     {
       "version": "5.7.5",
       "tag": "MOFLASHV5.7.5",
