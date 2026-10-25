@@ -1,7 +1,18 @@
 {
-  "latest": "5.8.0",
+  "latest": "5.8.5",
   "latestPrerelease": "",
   "releases": [
+    {
+      "version": "5.8.5",
+      "tag": "MOFLASHV5.8.5",
+      "name": "V5.8.5 MOFLASH",
+      "date": "2026-10-25",
+      "notes": "[+]修复MTKTOOL 固件包刷写 刷完之后不开机导致黑砖的问题\n  [+]优化UI 删除了原来的启动动画 更换部分组件\n  [+]修复FastBoot TooL 的大部分竞态问题 和Miflash 刷写不了的问题 包括读取分区表概率读不到\n  [+]修复与优化小米解锁部分交互与bug\n--------------\nEnglish:\n[+] Fixed the issue where MTKTOOL firmware packages caused the device to become unbootable after flashing   \n[+] Optimized the UI by removing the original startup animation and replacing some components   \n[+] Fixed most race conditions in FastBoot TooL and the issue where Miflash couldn't flash, including the problem of not being able to read the partition table   \n[+] Fixed and optimized some interactions and bugs related to Xiaomi unlocking",
+      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV5.8.5/MOFLASH_5.8.5-release-20261025.apk",
+      "apkName": "MOFLASH_5.8.5-release-20261025.apk",
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV5.8.5",
+      "prerelease": false
+    },
     {
       "version": "5.8.0",
       "tag": "MOFLASHV5.8.0",
