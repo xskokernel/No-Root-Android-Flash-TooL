@@ -294,7 +294,271 @@ a { color: inherit; text-decoration: none; }
   font-weight: 800;
 }
 
+/* ============================================================
+   增强视觉：鼠标光晕 / 彩蛋系统
+   ============================================================ */
+
+/* ---------- 跟随鼠标的柔光 ---------- */
+.cursor-glow {
+  position: fixed;
+  top: 0; left: 0;
+  width: 460px; height: 460px;
+  margin: -230px 0 0 -230px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle, rgba(77,140,255,.12), rgba(124,92,255,.06) 45%, transparent 70%);
+  opacity: 0;
+  transition: opacity .5s;
+  will-change: transform;
+}
+.cursor-glow.on { opacity: 1; }
+
+/* ---------- 彩蛋 Toast ---------- */
+.egg-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 34px;
+  z-index: 300;
+  transform: translate(-50%, 130%);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 18px;
+  border-radius: 14px;
+  font-size: 13px;
+  color: var(--text);
+  background: rgba(14,17,26,.92);
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 20px 50px -18px rgba(0,0,0,.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  transition: transform .45s cubic-bezier(.22,1.2,.36,1), opacity .35s;
+  pointer-events: none;
+  max-width: min(92vw, 460px);
+}
+.egg-toast.show {
+  transform: translate(-50%, 0);
+  opacity: 1;
+}
+.egg-ico {
+  font-size: 15px;
+  filter: drop-shadow(0 0 8px rgba(120,180,255,.8));
+}
+
+/* ---------- 成就弹窗 ---------- */
+.egg-achievement {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 320;
+  transform: translateY(150%) scale(.9);
+  opacity: 0;
+  transition: transform .6s cubic-bezier(.22,1.2,.36,1), opacity .4s;
+  pointer-events: none;
+}
+.egg-achievement.show {
+  transform: none;
+  opacity: 1;
+}
+.ach-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 22px 16px 18px;
+  border-radius: 18px;
+  background:
+    radial-gradient(300px 140px at 0% 0%, rgba(255,190,80,.16), transparent 70%),
+    linear-gradient(160deg, rgba(30,34,46,.96), rgba(14,17,26,.96));
+  border: 1px solid rgba(255,205,120,.35);
+  box-shadow: 0 24px 60px -20px rgba(0,0,0,.95), 0 0 0 1px rgba(255,205,120,.10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.ach-badge {
+  font-size: 30px;
+  line-height: 1;
+  filter: drop-shadow(0 0 14px rgba(255,200,90,.85));
+  animation: achBob 2.4s ease-in-out infinite;
+}
+@keyframes achBob {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-4px) rotate(3deg); }
+}
+.ach-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ach-body b {
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  color: #ffce7a;
+  font-weight: 800;
+}
+.ach-body span {
+  font-size: 15px;
+  font-weight: 700;
+}
+.ach-body small {
+  font-size: 11.5px;
+  color: var(--text-mute);
+}
+
+/* ---------- 隐藏终端 ---------- */
+.egg-terminal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 340;
+  width: min(620px, 92vw);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(8,10,15,.96);
+  border: 1px solid rgba(255,255,255,.16);
+  box-shadow: 0 40px 90px -30px rgba(0,0,0,.98), 0 0 0 1px rgba(120,180,255,.10);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transform: translate(-50%, -50%) scale(.94);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform .35s cubic-bezier(.22,1.2,.36,1), opacity .3s, visibility .3s;
+}
+.egg-terminal.show {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.term-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid var(--line);
+}
+.term-dots { display: flex; gap: 6px; }
+.term-dots i {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #2c3444;
+}
+.term-dots i:nth-child(1) { background: #ff5f57; }
+.term-dots i:nth-child(2) { background: #febc2e; }
+.term-dots i:nth-child(3) { background: #28c840; }
+.term-title {
+  flex: 1;
+  font-size: 11.5px;
+  color: var(--text-mute);
+  letter-spacing: .04em;
+  font-family: "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+.term-close {
+  background: none;
+  border: 0;
+  color: var(--text-mute);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background .2s, color .2s;
+}
+.term-close:hover { background: rgba(255,255,255,.08); color: var(--text); }
+.term-body {
+  padding: 16px 18px 20px;
+  min-height: 240px;
+  max-height: 52vh;
+  overflow-y: auto;
+  font-family: "SF Mono", ui-monospace, Menlo, Consolas, "Courier New", monospace;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: #9fe8c8;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.term-body .t-dim { color: #5b6478; }
+.term-body .t-ok { color: #6ee7a8; }
+.term-body .t-warn { color: #ffc06b; }
+.term-body .t-blue { color: #7fb0ff; }
+.term-body .t-cursor::after {
+  content: "|";
+  color: #6ee7a8;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- 顶部进度条 ---------- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 0;
+  z-index: 200;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+  box-shadow: 0 0 12px rgba(77,140,255,.8);
+  transition: width .08s linear;
+  pointer-events: none;
+}
+
+/* ---------- 增强的卡片 hover 光斑 ---------- */
+.card::after {
+  content: "";
+  position: absolute;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .35s;
+  background: radial-gradient(circle, rgba(255,255,255,.10), transparent 65%);
+  transform: translate(-50%, -50%);
+  left: var(--mx, 50%);
+  top: var(--my, 50%);
+  z-index: 0;
+}
+.card:hover::after { opacity: 1; }
+.card > * { position: relative; z-index: 1; }
+
+/* ---------- Hero 标题逐字渐入 ---------- */
+.hero h1 span.ch {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(18px) rotateX(-40deg);
+  animation: chIn .8s cubic-bezier(.22,1.1,.36,1) forwards;
+}
+@keyframes chIn {
+  to { opacity: 1; transform: none; }
+}
+
+/* ---------- 图标点击旋转彩蛋 ---------- */
+.hero-icon.cheat {
+  animation: cheatSpin 1.2s cubic-bezier(.22,1,.36,1);
+}
+@keyframes cheatSpin {
+  0% { transform: rotate(0) scale(1); }
+  45% { transform: rotate(200deg) scale(1.14); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+/* ---------- 全站彩蛋态：像素风 ---------- */
+body.egg-pixel {
+  --radius: 2px;
+}
+body.egg-pixel .card,
+body.egg-pixel .shot {
+  border-radius: 2px !important;
+  border-color: rgba(120,255,180,.35) !important;
+}
+
+@media (max-width: 760px) {
+  .egg-achievement { right: 14px; bottom: 14px; left: 14px; }
+  .ach-inner { padding: 14px 16px; }
+  .cursor-glow { display: none; }
+}
+
 /* ---------- 卡片 ---------- */
+
 .grid { display: grid; gap: 16px; }
 .grid-4 { grid-template-columns: repeat(4, 1fr); }
 .grid-3 { grid-template-columns: repeat(3, 1fr); }
