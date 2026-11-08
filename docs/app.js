@@ -162,9 +162,16 @@
       if (!toast) return;
       if (toastIco) toastIco.textContent = ico || "✦";
       if (toastText) toastText.textContent = text;
+      toast.style.display = "";   // 解除内联隐藏
       toast.classList.add("show");
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(function () { toast.classList.remove("show"); }, 3800);
+      toastTimer = setTimeout(function () {
+        toast.classList.remove("show");
+        // 过渡结束后重新隐藏，避免裸露
+        setTimeout(function () {
+          if (!toast.classList.contains("show")) toast.style.display = "none";
+        }, 480);
+      }, 3800);
     }
     window.__moflashSay = say;
 
@@ -251,10 +258,16 @@
           seq = 0;
           if (!achDone && ach) {
             achDone = true;
+            ach.style.display = "";
             ach.classList.add("show");
             createParticles();
             say("秘籍生效：所有分区已就绪 🏆", "🎉");
-            setTimeout(function () { ach.classList.remove("show"); }, 6000);
+            setTimeout(function () {
+              ach.classList.remove("show");
+              setTimeout(function () {
+                if (!ach.classList.contains("show")) ach.style.display = "none";
+              }, 650);
+            }, 6000);
           } else {
             say("秘籍已用过一次啦，别贪心 ~", "😄");
           }
@@ -362,6 +375,7 @@
       if (termOpen) return;
       termOpen = true;
       termBody.innerHTML = "";
+      term.style.display = "";   // 解除内联隐藏，交给 .show 控制
       term.classList.add("show");
       var i = 0;
       (function typeLine() {
@@ -379,6 +393,10 @@
     function closeTerm() {
       if (!term) return;
       term.classList.remove("show");
+      // 过渡结束后重新内联隐藏，避免任何情况下裸露
+      setTimeout(function () {
+        if (!termOpen) term.style.display = "none";
+      }, 380);
       termOpen = false;
     }
 
