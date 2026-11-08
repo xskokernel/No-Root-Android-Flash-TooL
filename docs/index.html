@@ -18,12 +18,44 @@
   <span class="a1"></span><span class="a2"></span><span class="a3"></span>
 </div>
 
+<!-- 鼠标光晕 -->
+<div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+<!-- 彩蛋提示 -->
+<div class="egg-toast" id="egg-toast" role="status" aria-live="polite">
+  <span class="egg-ico" id="egg-ico">✦</span>
+  <span class="egg-text" id="egg-text"></span>
+</div>
+
+<!-- Konami 解锁成就 -->
+<div class="egg-achievement" id="egg-achievement" aria-hidden="true">
+  <div class="ach-inner">
+    <div class="ach-badge">🏆</div>
+    <div class="ach-body">
+      <b>成就解锁</b>
+      <span>刷机大师</span>
+      <small>你找到了隐藏的 Konami 秘籍</small>
+    </div>
+  </div>
+</div>
+
+<!-- 隐藏的终端彩蛋 -->
+<div class="egg-terminal" id="egg-terminal" aria-hidden="true">
+  <div class="term-bar">
+    <span class="term-dots"><i></i><i></i><i></i></span>
+    <span class="term-title">moflash@otg: ~</span>
+    <button class="term-close" id="term-close" aria-label="关闭">✕</button>
+  </div>
+  <div class="term-body" id="term-body"></div>
+</div>
+
 <header class="nav" id="nav">
   <a class="brand" href="#top">
     <img src="assets/icon_rounded.png" alt="MOFLASH" />
     <span>MOFLASH</span>
   </a>
   <nav class="nav-links">
+    <a href="#otg-section">OTG 演示</a>
     <a href="#features">特性</a>
     <a href="#tools">功能</a>
     <a href="#shots">截图</a>
@@ -64,6 +96,56 @@
       <span>Android 8.0+</span><i></i>
       <span>arm64-v8a</span><i></i>
       <span>USB Host / OTG</span>
+    </div>
+  </section>
+
+  <!-- ================= OTG PLAYGROUND ================= -->
+  <section class="section playground-section" id="otg-section">
+    <div class="sec-head">
+      <span class="sec-tag">OTG 演示</span>
+      <h2>拖一拖，<br class="mb" />把线拉起来。</h2>
+      <p class="sec-sub">左边是主控端（跑着 MOFLASH），右边是被控端（BL 未解，黑屏）。<br class="pc" />拖动任意一台手机，OTG 线会实时跟着弯曲 —— 距离太远会拉断。</p>
+    </div>
+
+    <div class="playground card" id="playground">
+      <canvas class="otg-line" id="otg-canvas"></canvas>
+
+      <div class="pg-hint" id="pg-hint">拖动手机试试 · 双击回位</div>
+
+      <div class="phone master" id="phone-a" data-label="主控端">
+        <div class="phone-body">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <img src="assets/master_screen.jpg" alt="MOFLASH 主控端运行界面" draggable="false" />
+            <div class="screen-glare"></div>
+          </div>
+          <div class="port" data-port></div>
+        </div>
+        <div class="phone-tag"><b>主控端</b><span>MOFLASH · No Root</span></div>
+      </div>
+
+      <div class="phone slave" id="phone-b" data-label="被控端">
+        <div class="phone-body">
+          <div class="phone-notch"></div>
+          <div class="phone-screen dark">
+            <div class="dark-face">
+              <span class="dark-pulse"></span>
+              <em>BLACK SCREEN</em>
+              <small>BL LOCKED</small>
+            </div>
+            <div class="screen-glare"></div>
+          </div>
+          <div class="port" data-port></div>
+        </div>
+        <div class="phone-tag"><b>被控端</b><span>等待刷写</span></div>
+      </div>
+
+      <div class="pg-status" id="pg-status">
+        <span class="st-dot"></span>
+        <span class="st-text" id="pg-status-text">OTG 已连接</span>
+        <span class="st-sep"></span>
+        <span class="st-len" id="pg-len">—</span>
+      </div>
     </div>
   </section>
 
