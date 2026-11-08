@@ -1,7 +1,18 @@
 {
-  "latest": "5.8.5",
+  "latest": "6.0.0",
   "latestPrerelease": "",
   "releases": [
+    {
+      "version": "6.0.0",
+      "tag": "MOFLASHV6.0.0",
+      "name": "V6.0.0 MOFLASH",
+      "date": "2026-11-08",
+      "notes": "[+]MTKTOOL大更新 重构部分 增加flash_xml功能\n  [+]UI大更新\n  [+]增加终端功能(还是测试版 目前只建议非root用户使用)\n  [+]优化了免Root时的部分逻辑 具体表现为fdpass改进 增加防竞态机制\n  [+]Fastboot页增加 全量包刷写 优化部分UI\n  [+]优化设备连接状态胶囊\n  [+]还有很多细节优化,自行探索\n  [+]修复已知Bug\n--------------\nEnglish:\n[+] Major update to MTKTOOL: restructured some parts and added flash_xml functionality\n[+] Major UI update\n[+] Added terminal functionality (still beta - currently only recommended for non-root users)\n[+] Optimized some logic for non-root mode, specifically improved fdpass and added anti-race condition mechanism\n[+] Added full package flashing option on Fastboot page and optimized some UI elements\n[+] Optimized the device connection status icon\n[+] Many more minor optimizations - explore them yourself\n[+] Fixed known bugs",
+      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV6.0.0/MOFLASH_6.0.0-release-20261108.apk",
+      "apkName": "MOFLASH_6.0.0-release-20261108.apk",
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV6.0.0",
+      "prerelease": false
+    },
     {
       "version": "5.8.5",
       "tag": "MOFLASHV5.8.5",
