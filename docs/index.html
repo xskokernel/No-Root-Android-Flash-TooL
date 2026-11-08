@@ -22,13 +22,13 @@
 <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
 
 <!-- 彩蛋提示 -->
-<div class="egg-toast" id="egg-toast" role="status" aria-live="polite">
+<div class="egg-toast" id="egg-toast" role="status" aria-live="polite" style="display:none">
   <span class="egg-ico" id="egg-ico">✦</span>
   <span class="egg-text" id="egg-text"></span>
 </div>
 
 <!-- Konami 解锁成就 -->
-<div class="egg-achievement" id="egg-achievement" aria-hidden="true">
+<div class="egg-achievement" id="egg-achievement" aria-hidden="true" style="display:none">
   <div class="ach-inner">
     <div class="ach-badge">🏆</div>
     <div class="ach-body">
@@ -39,8 +39,8 @@
   </div>
 </div>
 
-<!-- 隐藏的终端彩蛋 -->
-<div class="egg-terminal" id="egg-terminal" aria-hidden="true">
+<!-- 隐藏的终端彩蛋（内联隐藏，避免样式未加载时裸露） -->
+<div class="egg-terminal" id="egg-terminal" aria-hidden="true" style="display:none">
   <div class="term-bar">
     <span class="term-dots"><i></i><i></i><i></i></span>
     <span class="term-title">moflash@otg: ~</span>
