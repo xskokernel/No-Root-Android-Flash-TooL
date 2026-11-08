@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xskokernel.github.io/No-Root-Android-Flash-TooL/sitemap.xml
