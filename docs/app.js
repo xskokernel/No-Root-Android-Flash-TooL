@@ -98,6 +98,9 @@
     if (el.dlBtn) el.dlBtn.href = RELEASES_PAGE + "/latest";
   }
 
+  /* 供历史版本列表复用（避免重复请求 latest 接口） */
+  window.__moflashRenderRelease = render;
+
   /* ---------- 拉取 Release（失败静默降级到静态链接） ---------- */
   function loadRelease() {
     if (!window.fetch) { fallback(); return; }
@@ -187,16 +190,16 @@
       return wrap.getBoundingClientRect();
     }
 
-    /* 手机尺寸（含标签区不算，只算机身） */
+    /* 手机尺寸：用 offsetWidth/offsetHeight，避免 getBoundingClientRect
+       与自身的 left/top 互相反馈（clamp 改位置 → 影响测量 → 抖动） */
     function bodySize(el) {
       var body = el.querySelector(".phone-body");
-      var r = body ? body.getBoundingClientRect() : el.getBoundingClientRect();
-      return { w: r.width, h: r.height };
+      if (!body) return { w: el.offsetWidth, h: el.offsetHeight };
+      return { w: body.offsetWidth, h: body.offsetHeight };
     }
 
     /* 计算某台手机「底部 USB 口」在容器坐标系中的位置 */
     function portPoint(el) {
-      var b = box();
       var size = bodySize(el);
       var left = parseFloat(el.style.left) || 0;
       var top = parseFloat(el.style.top) || 0;
@@ -207,44 +210,50 @@
     function clamp(el) {
       var b = box();
       var size = bodySize(el);
-      var tagH = 30;
+      var tagH = 32;
       var left = parseFloat(el.style.left) || 0;
       var top = parseFloat(el.style.top) || 0;
       var maxLeft = Math.max(0, b.width - size.w);
       var maxTop = Math.max(0, b.height - size.h - tagH);
       left = Math.min(Math.max(left, 0), maxLeft);
-      top = Math.min(Math.max(top, 40), maxTop);
+      top = Math.min(Math.max(top, 40), Math.max(40, maxTop));
       el.style.left = left + "px";
       el.style.top = top + "px";
     }
 
     function layout() {
       var b = box();
+      if (!b.width || !b.height) return;
+
       canvas.width = Math.round(b.width * dpr);
       canvas.height = Math.round(b.height * dpr);
       canvas.style.width = b.width + "px";
       canvas.style.height = b.height + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // 首次布局：把百分比位置换成像素
+      // 首次布局：换成像素定位
       if (!wrap.dataset.laid) {
-        var sizeA = bodySize(phoneA);
-        var sizeB = bodySize(phoneB);
-        var w = b.width;
-        var h = b.height;
-        var pad = Math.max(16, w * 0.06);
-        var topY = Math.max(60, (h - sizeA.h - 40) / 2 + 6);
+        var w0 = b.width;
+        var sA = bodySize(phoneA);
+        var sB = bodySize(phoneB);
+        var pad0 = Math.max(16, w0 * 0.06);
+        var topY0 = Math.max(60, (b.height - sA.h - 48) / 2 + 6);
 
-        phoneA.style.left = pad + "px";
-        phoneA.style.top = topY + "px";
-        phoneB.style.left = Math.max(pad, w - sizeB.w - pad) + "px";
-        phoneB.style.top = topY + "px";
+        phoneA.style.left = pad0 + "px";
+        phoneA.style.top = topY0 + "px";
+        phoneB.style.left = Math.max(pad0, w0 - sB.w - pad0) + "px";
+        phoneB.style.top = topY0 + "px";
 
-        // 最大线长 ≈ 初始距离的 1.7 倍
-        var dx = (w - sizeB.w - pad) - pad;
-        MAX_LEN = Math.max(320, dx * 1.65);
         wrap.dataset.laid = "1";
       }
+
+      // 最大线长按「当前容器可容纳的最远水平距离」重算，
+      // 这样窗口缩放（手机尺寸变化）后线长阈值不会失真。
+      var sizeA = bodySize(phoneA);
+      var sizeB = bodySize(phoneB);
+      var reach = Math.max(0, b.width - sizeA.w / 2 - sizeB.w / 2);
+      MAX_LEN = Math.max(280, reach * 0.82);
+
       clamp(phoneA);
       clamp(phoneB);
       draw();
@@ -288,7 +297,6 @@
       var midY = (A.y + B.y) / 2 + sag;
 
       // 颜色随张力变化：松=青蓝，紧=橙红警告
-      var hueHue = ratio > 0.82 ? 8 : 205 + ratio * 40;
       var glow = ratio > 0.82 ? "255,140,80" : (ratio > 0.6 ? "120,180,255" : "90,150,255");
 
       // ---- 外层柔光 ----
@@ -461,27 +469,41 @@
     }
 
     [phoneA, phoneB].forEach(function (el) {
-      el.addEventListener("mousedown", function (e) { startDrag(e, el); });
-      el.addEventListener("touchstart", function (e) { startDrag(e, el); }, { passive: false });
-      // 双击/双触回位
+      el.addEventListener("mousedown", function (e) {
+        if (e.button !== 0) return;
+        startDrag(e, el);
+      });
+      el.addEventListener("touchstart", function (e) {
+        if (e.touches.length > 1) return;
+        startDrag(e, el);
+      }, { passive: false });
+
+      // 双击回位：只有「手机本体」响应；屏幕区域会 stopPropagation，
+      // 所以被控端黑屏双击不会被这里吃掉（详见 initEggs 第 9 条）。
       el.addEventListener("dblclick", function (e) {
         e.preventDefault();
         resetPositions();
       });
     });
 
+    // 统一在 window 上收尾，避免指针移出元素后拖拽卡死
     window.addEventListener("mousemove", moveDrag);
     window.addEventListener("touchmove", moveDrag, { passive: false });
     window.addEventListener("mouseup", endDrag);
     window.addEventListener("touchend", endDrag);
     window.addEventListener("touchcancel", endDrag);
+    window.addEventListener("blur", endDrag);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) endDrag();
+    });
 
     function resetPositions() {
       var b = box();
+      if (!b.width || !b.height) return;
       var sizeA = bodySize(phoneA);
       var sizeB = bodySize(phoneB);
       var pad = Math.max(16, b.width * 0.06);
-      var topY = Math.max(60, (b.height - sizeA.h - 40) / 2 + 6);
+      var topY = Math.max(60, (b.height - sizeA.h - 48) / 2 + 6);
 
       phoneA.classList.add("returning");
       phoneB.classList.add("returning");
@@ -490,7 +512,9 @@
       phoneB.style.left = Math.max(pad, b.width - sizeB.w - pad) + "px";
       phoneB.style.top = topY + "px";
 
-      setTimeout(function () {
+      // 过渡结束后重绘，保证线缆贴合最终位置
+      clearTimeout(wrap._retTimer);
+      wrap._retTimer = setTimeout(function () {
         phoneA.classList.remove("returning");
         phoneB.classList.remove("returning");
         draw();
@@ -587,17 +611,21 @@
     }, { passive: true });
 
     /* ---------- 4. Hero 标题逐字动画 ---------- */
+    /* ⚠ em 标签带 background-clip:text 渐变，逐字拆分会破坏渐变效果，
+       因此整段跳过 em，只对纯文本节点做拆字。 */
     var h1 = document.querySelector(".hero h1");
     if (h1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      var wrapChars = function (node, counter) {
+      var counter = { n: 0 };
+      var walk = function (node) {
         var kids = Array.prototype.slice.call(node.childNodes);
         kids.forEach(function (n) {
           if (n.nodeType === 3) {
             var txt = n.textContent;
+            if (!txt.trim()) return;
             var frag = document.createDocumentFragment();
             for (var i = 0; i < txt.length; i++) {
               var ch = txt[i];
-              if (ch === " " || ch === "\n") {
+              if (/\s/.test(ch)) {
                 frag.appendChild(document.createTextNode(ch));
               } else {
                 var sp = document.createElement("span");
@@ -608,12 +636,12 @@
               }
             }
             node.replaceChild(frag, n);
-          } else if (n.nodeType === 1) {
-            wrapChars(n, counter);
+          } else if (n.nodeType === 1 && n.tagName !== "EM") {
+            walk(n);
           }
         });
       };
-      wrapChars(h1, { n: 0 });
+      walk(h1);
     }
 
     /* ---------- 5. Konami 秘籍 → 成就 ---------- */
@@ -713,29 +741,57 @@
     }
 
     /* ---------- 9. 被控端双击 → 点亮 ---------- */
+    /* ⚠ 不能挂在 phone-b 的 dblclick 上：那样会和「双击回位」抢同一个事件，
+       导致同一台手机上永远只能回位、点不亮。改用屏幕区域单独响应。 */
     var slave = document.getElementById("phone-b");
     if (slave) {
-      var lit = false;
-      slave.addEventListener("dblclick", function () {
-        lit = !lit;
-        var screen = slave.querySelector(".phone-screen");
-        var face = slave.querySelector(".dark-face");
-        if (!screen) return;
-        screen.style.transition = "background .45s";
-        if (lit) {
-          screen.style.background = "radial-gradient(circle at 50% 40%, #1b3a2e 0%, #0a1712 55%, #05080a 100%)";
-          if (face) {
-            face.innerHTML = "<span class='dark-pulse' style='background:#34e2c0;box-shadow:0 0 14px #34e2c0'></span><em style='color:#6ee7a8'>BOOT OK</em><small style='color:#3a6b56'>SYSTEM ONLINE</small>";
+      var litState = false;
+      var slaveScreen = slave.querySelector(".phone-screen");
+      var slaveFace = slave.querySelector(".dark-face");
+      var dblTimer = 0;
+      var tapCount = 0;
+
+      function toggleLight() {
+        litState = !litState;
+        if (!slaveScreen) return;
+        slaveScreen.style.transition = "background .45s";
+        if (litState) {
+          slaveScreen.style.background = "radial-gradient(circle at 50% 40%, #1b3a2e 0%, #0a1712 55%, #05080a 100%)";
+          if (slaveFace) {
+            slaveFace.innerHTML =
+              "<span class='dark-pulse' style='background:#34e2c0;box-shadow:0 0 14px #34e2c0'></span>" +
+              "<em style='color:#6ee7a8'>BOOT OK</em>" +
+              "<small style='color:#3a6b56'>SYSTEM ONLINE</small>";
           }
           say("被控端刷写完成，成功开机 ✅", "⚡");
         } else {
-          screen.style.background = "";
-          if (face) {
-            face.innerHTML = "<span class='dark-pulse'></span><em>BLACK SCREEN</em><small>BL LOCKED</small>";
+          slaveScreen.style.background = "";
+          if (slaveFace) {
+            slaveFace.innerHTML = "<span class='dark-pulse'></span><em>BLACK SCREEN</em><small>BL LOCKED</small>";
           }
           say("已复位：黑屏待刷写", "📴");
         }
-      });
+      }
+
+      /* 用点击计数模拟双击，且阻止冒泡，避免触发手机本体的 dblclick 回位 */
+      if (slaveScreen) {
+        slaveScreen.style.cursor = "pointer";
+        slaveScreen.addEventListener("click", function (e) {
+          e.stopPropagation();
+          tapCount++;
+          clearTimeout(dblTimer);
+          dblTimer = setTimeout(function () { tapCount = 0; }, 320);
+          if (tapCount >= 2) {
+            tapCount = 0;
+            toggleLight();
+          }
+        });
+        // 阻止屏幕区域的 dblclick 冒泡到手机（否则会被回位逻辑吃掉）
+        slaveScreen.addEventListener("dblclick", function (e) {
+          e.stopPropagation();
+          e.preventDefault();
+        });
+      }
     }
 
     /* ---------- 10. 隐藏终端：按 ` 或 ~ ---------- */
@@ -798,8 +854,236 @@
     });
     if (termClose) termClose.addEventListener("click", closeTerm);
 
-    /* ---------- 11. 连续拖手机 3 次被拉断 → 建议 ---------- */
+    /* ---------- 11. 彩蛋：拉断 3 次给个提示 ---------- */
     window.__moflashBrokenCount = 0;
+  }
+
+  /* ============================================================
+     历史版本列表
+     - 拉取全部 Release（分页直到拿完），直接给 APK 下载直链
+     - 同时保留「去 GitHub 看」入口
+     ============================================================ */
+  function initVersions() {
+    var listEl = document.getElementById("ver-list");
+    var tipEl = document.getElementById("ver-tip");
+    var searchEl = document.getElementById("ver-search");
+    var filterEl = document.getElementById("ver-filter");
+    if (!listEl) return;
+
+    var state = {
+      all: [],
+      filter: "all",
+      keyword: "",
+      loaded: false
+    };
+
+    /* ---------- 版本号排序用 ---------- */
+    function parseVer(name) {
+      var m = String(name || "").match(/(\d+)\.(\d+)(?:\.(\d+))?/);
+      if (!m) return [0, 0, 0];
+      return [+m[1], +(m[2] || 0), +(m[3] || 0)];
+    }
+
+    function fmtSize(bytes) {
+      if (!bytes || isNaN(bytes)) return "";
+      var mb = bytes / 1048576;
+      return mb >= 1 ? mb.toFixed(1) + " MB" : (bytes / 1024).toFixed(0) + " KB";
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return "";
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return "";
+      var p = function (n) { return n < 10 ? "0" + n : "" + n; };
+      return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate());
+    }
+
+    var GH_SVG =
+      '<svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>';
+
+    var DL_SVG =
+      '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v9.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V4a1 1 0 0 1 1-1Zm-7 15a1 1 0 0 1 1 1v1h12v-1a1 1 0 1 1 2 0v1.5A1.5 1.5 0 0 1 18.5 22h-13A1.5 1.5 0 0 1 4 20.5V19a1 1 0 0 1 1-1Z"/></svg>';
+
+    /* 轻量 HTML 转义：用字符码拼实体，避免源码里出现原始实体字面量 */
+    var _AMP = 38, _LT = 60, _GT = 62, _QUOT = 34, _APOS = 39;
+    var _ENT = {};
+    _ENT[_AMP] = 'amp';
+    _ENT[_LT] = 'lt';
+    _ENT[_GT] = 'gt';
+    _ENT[_QUOT] = 'quot';
+    _ENT[_APOS] = '39';
+    function esc(s) {
+      if (s == null) return '';
+      var out = '';
+      var str = String(s);
+      for (var i = 0; i < str.length; i++) {
+        var cc = str.charCodeAt(i);
+        if (_ENT[cc]) {
+          out += _ENT[cc] === '39' ? '&#39;' : '&' + _ENT[cc] + ';';
+        } else {
+          out += str.charAt(i);
+        }
+      }
+      return out;
+    }
+
+    /* ---------- 渲染 ---------- */
+    function render() {
+      if (!state.loaded) return;
+
+      var kw = state.keyword.trim().toLowerCase();
+      var items = state.all.filter(function (r) {
+        if (state.filter === "pre" && !r.prerelease) return false;
+        if (state.filter === "stable" && r.prerelease) return false;
+        if (!kw) return true;
+        var hay = (r.name + " " + r.tag_name).toLowerCase();
+        return hay.indexOf(kw) !== -1;
+      });
+
+      if (!items.length) {
+        listEl.innerHTML =
+          '<div class="ver-empty">' +
+          (kw ? "没有匹配「" + esc(kw) + "」的版本" : "暂无符合条件的版本") +
+          "</div>";
+        return;
+      }
+
+      var html = "";
+      items.forEach(function (r, i) {
+        var apk = null;
+        (r.assets || []).forEach(function (a) {
+          if (!apk && /\.apk$/i.test(a.name)) apk = a;
+        });
+
+        var v = parseVer(r.name || r.tag_name);
+        var verLabel = v[0] + "." + v[1] + "." + v[2];
+        var isLatest = i === 0 && state.filter === "all" && !kw;
+
+        var metaBits = [];
+        if (apk) metaBits.push('<span class="nm">' + fmtSize(apk.size) + "</span>");
+        var d = fmtDate(r.published_at);
+        if (d) metaBits.push("<span>" + d + "</span>");
+        if (apk && typeof apk.download_count === "number")
+          metaBits.push("<span>下载 " + apk.download_count + " 次</span>");
+        if (apk) metaBits.push('<span title="' + esc(apk.name) + '">' + esc(shortName(apk.name)) + "</span>");
+
+        html +=
+          '<div class="ver-item' + (isLatest ? " latest" : "") + '">' +
+            '<div class="ver-badge">' +
+              "<b>" + esc(verLabel) + "</b>" +
+              "<small>" + (isLatest ? "LATEST" : "VERSION") + "</small>" +
+            "</div>" +
+            '<div class="ver-mid">' +
+              '<div class="ver-title">' +
+                "<h4>" + esc(r.name || r.tag_name) + "</h4>" +
+                (isLatest ? '<span class="ver-tagchip new">最新</span>' : "") +
+                (r.prerelease ? '<span class="ver-tagchip pre">预览版</span>' : "") +
+              "</div>" +
+              '<div class="ver-meta">' + metaBits.join("<i></i>") + "</div>" +
+            "</div>" +
+            '<div class="ver-actions">' +
+              (apk
+                ? '<a class="ver-dl" href="' + esc(apk.browser_download_url) + '" download rel="noopener">' + DL_SVG + "<span>下载 APK</span></a>"
+                : '<span class="ver-dl muted">无安装包</span>') +
+              '<a class="ver-gh" href="' + esc(r.html_url) + '" target="_blank" rel="noopener" title="在 GitHub 查看该版本">' + GH_SVG + "</a>" +
+            "</div>" +
+          "</div>";
+      });
+
+      listEl.innerHTML = html;
+
+      if (tipEl) {
+        tipEl.textContent =
+          "共 " + state.all.length + " 个版本" +
+          (items.length !== state.all.length ? "，当前显示 " + items.length + " 个" : "") +
+          " · 点击「下载 APK」直接开始下载，不跳转页面";
+      }
+    }
+
+    function shortName(n) {
+      // 只保留版本和日期，太长就截断
+      var s = String(n).replace(/^MOFLASH[_-]?/i, "");
+      return s.length > 34 ? s.slice(0, 32) + "…" : s;
+    }
+
+    /* ---------- 拉取全部 Release ---------- */
+    function loadAll() {
+      var base = "https://api.github.com/repos/" + OWNER + "/" + REPO + "/releases?per_page=100";
+      var all = [];
+
+      function page(url, guard) {
+        if (guard > 5) return finish();
+        return fetch(url, { headers: { Accept: "application/vnd.github+json" } })
+          .then(function (r) {
+            if (!r.ok) throw new Error("HTTP " + r.status);
+            return r.json();
+          })
+          .then(function (data) {
+            if (!Array.isArray(data) || !data.length) return finish();
+            all = all.concat(data);
+            if (data.length < 100) return finish();
+            var last = data[data.length - 1];
+            // 用 id 做游标，避免超过 100 个后漏版本
+            return page(base + "&before=" + last.id, guard + 1);
+          })
+          .catch(function (e) {
+            if (all.length) finish();
+            else fail(e);
+          });
+      }
+
+      function finish() {
+        all.sort(function (a, b) {
+          var va = parseVer(a.name || a.tag_name), vb = parseVer(b.name || b.tag_name);
+          for (var i = 0; i < 3; i++) if (va[i] !== vb[i]) return vb[i] - va[i];
+          return new Date(b.published_at) - new Date(a.published_at);
+        });
+        state.all = all;
+        state.loaded = true;
+        render();
+        // 最新版同步给 Hero / 下载区（复用第一页数据，少一次请求）
+        if (all.length && window.__moflashRenderRelease) {
+          window.__moflashRenderRelease(all[0]);
+        }
+      }
+
+      function fail(e) {
+        state.loaded = true;
+        listEl.innerHTML =
+          '<div class="ver-empty">版本列表加载失败（' + esc(e && e.message || "网络异常") +
+          "）<br>可以直接前往 GitHub 查看全部 Release。</div>";
+        if (tipEl) tipEl.textContent = "无法访问 GitHub API，请检查网络或使用代理。";
+      }
+
+      page(base, 0);
+    }
+
+    /* ---------- 交互 ---------- */
+    if (searchEl) {
+      var sTimer = 0;
+      searchEl.addEventListener("input", function () {
+        clearTimeout(sTimer);
+        var v = searchEl.value;
+        sTimer = setTimeout(function () {
+          state.keyword = v;
+          render();
+        }, 140);
+      });
+    }
+
+    if (filterEl) {
+      filterEl.addEventListener("click", function (e) {
+        var btn = e.target.closest(".vf-btn");
+        if (!btn) return;
+        Array.prototype.forEach.call(filterEl.children, function (b) {
+          b.classList.toggle("active", b === btn);
+        });
+        state.filter = btn.dataset.filter || "all";
+        render();
+      });
+    }
+
+    loadAll();
   }
 
   /* ---------- 初始化 ---------- */
@@ -808,8 +1092,19 @@
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     setupReveal();
-    loadRelease();
     initPlayground();
     initEggs();
+
+    // 版本列表会拉取全部 Release，成功后顺带回填 Hero / 下载区，
+    // 所以这里不再单独请求 /releases/latest（少一次 API 调用、降低限流风险）。
+    initVersions();
+
+    // 兜底：若版本列表在 9 秒内还没回填（网络慢或接口不可达），
+    // 才退回到单次 latest 请求，保证首屏版本信息不空着。
+    setTimeout(function () {
+      if (el.heroVersion && el.heroVersion.textContent.indexOf("最新版本") !== -1) {
+        loadRelease();
+      }
+    }, 9000);
   });
 })();
