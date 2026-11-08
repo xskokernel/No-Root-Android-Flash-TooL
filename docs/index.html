@@ -60,6 +60,7 @@
     <a href="#tools">功能</a>
     <a href="#shots">截图</a>
     <a href="#req">要求</a>
+    <a href="#versions">版本</a>
     <a href="#download">下载</a>
   </nav>
   <a class="btn btn-ghost nav-cta" href="https://github.com/xskokernel/No-Root-Android-Flash-TooL" target="_blank" rel="noopener">
@@ -296,6 +297,48 @@
     </div>
   </section>
 
+  <!-- ================= VERSION HISTORY ================= -->
+  <section class="section" id="versions">
+    <div class="sec-head">
+      <div class="sec-head-row">
+        <div>
+          <span class="sec-tag">历史版本</span>
+          <h2>全部版本，<br class="mb" />直接下载。</h2>
+        </div>
+        <div class="ver-tools">
+          <div class="ver-search">
+            <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2Zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12Z"/></svg>
+            <input type="search" id="ver-search" placeholder="搜索版本号，如 5.8 或 4.7" autocomplete="off" />
+          </div>
+          <div class="ver-filter" id="ver-filter">
+            <button class="vf-btn active" data-filter="all">全部</button>
+            <button class="vf-btn" data-filter="stable">正式版</button>
+            <button class="vf-btn" data-filter="pre">预览版</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ver-list" id="ver-list" aria-live="polite">
+      <div class="ver-skeleton">
+        <div class="sk-row"></div><div class="sk-row"></div><div class="sk-row"></div>
+      </div>
+    </div>
+
+    <div class="ver-foot">
+      <p class="ver-tip" id="ver-tip">正在从 GitHub 拉取全部 Release…</p>
+      <div class="ver-links">
+        <a class="btn btn-glass" href="https://github.com/xskokernel/No-Root-Android-Flash-TooL" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          项目主页
+        </a>
+        <a class="btn btn-glass" href="https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases" target="_blank" rel="noopener">
+          全部 Release
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- ================= DOWNLOAD ================= -->
   <section class="section download" id="download">
     <div class="dl-card card">
@@ -307,7 +350,9 @@
           <a class="btn btn-primary" id="dl-btn" href="https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/latest">
             <span id="dl-btn-text">前往 Release</span>
           </a>
-          <a class="btn btn-glass" href="https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases" target="_blank" rel="noopener">历史版本</a>
+          <a class="btn btn-glass" href="#versions">全部历史版本</a>
+          <a class="btn btn-glass" href="https://github.com/xskokernel/No-Root-Android-Flash-TooL" target="_blank" rel="noopener">项目主页</a>
+          <a class="btn btn-glass" href="https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases" target="_blank" rel="noopener">GitHub Releases</a>
         </div>
         <div class="dl-note" id="dl-note"></div>
       </div>
