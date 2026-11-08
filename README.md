@@ -11,7 +11,7 @@
 账号密码可在最底下获取
 
 [![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://www.android.com/)
-[![Android](https://img.shields.io/badge/Android-7.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
+[![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com/)
 [![Kotlin](https://img.shields.io/badge/Kotlin-Compose-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
 [![No Root](https://img.shields.io/badge/No--Root-Supported-00C853?style=for-the-badge&logo=checkmarx&logoColor=white)](#)
 
@@ -87,7 +87,7 @@ MIUI / HyperOS 风格界面 + 液体玻璃效果，清晰的状态提示与沉�
 
 | 项目 | 要求 |
 |:---|:---|
-| 系统 | Android 7.0 (API 24) 及以上 |
+| 系统 | Android 8.0 (API 26) 及以上 |
 | 架构 | arm64-v8a |
 | 硬件 | 支持 **USB Host**（OTG） |
 | 权限 | USB 访问、存储、通知等（按需申请） |
