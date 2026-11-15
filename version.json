@@ -1,7 +1,18 @@
 {
-  "latest": "6.0.0",
+  "latest": "26.11.15",
   "latestPrerelease": "",
   "releases": [
+    {
+      "version": "26.11.15",
+      "tag": "MOFLASHV26.11.15",
+      "name": "V26.11.15 MOFLASH",
+      "date": "2026-11-15",
+      "notes": "[+]MTKTOOL更新功能 小米BloB V6 授权 (Beta阶段未验证可用性) 以及增加一些用户需要的功能\n  [+]Ui优化\n  [+]修复已知Bug\n--------------\nEnglish:\n[+] Updated MTKTOOL features, Xiaomi BloB V6 authorization (Beta version - availability not verified) And add some features users need\n[+] UI optimizations\n[+] Fixed known bugs",
+      "apk": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/download/MOFLASHV26.11.15/MOFLASH_26.11.15-release-20261115.apk",
+      "apkName": "MOFLASH_26.11.15-release-20261115.apk",
+      "url": "https://github.com/xskokernel/No-Root-Android-Flash-TooL/releases/tag/MOFLASHV26.11.15",
+      "prerelease": false
+    },
     {
       "version": "6.0.0",
       "tag": "MOFLASHV6.0.0",
